@@ -6,7 +6,7 @@ const TrendingPosts = async () => {
   const posts = await fetchTrendingPosts();
 
   return (
-    <div className="m-4 p-4 md:w-60  backdrop-blur-sm bg-secondary/30 rounded-lg space-y-2 text-sm">
+    <div className="m-4 p-4 md:w-60  backdrop-blur-sm bg-secondary/30 rounded-lg space-y-2 text-sm motion-preset-slide-left">
       <div className="text-lg tracking-wide font-geist_mono mb-5 flex gap-2 items-center">
         Trending Posts <ChevronRight />
       </div>

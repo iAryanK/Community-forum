@@ -8,7 +8,7 @@ const PostCard = ({ post }: { post: any }) => {
   return (
     <Link
       href={`/posts/${post._id}`}
-      className="hover:bg-secondary/50 hover:rounded-lg p-3 flex gap-2 items-start border-b border-secondary hover:border-none mt-1"
+      className="hover:bg-secondary/50 hover:rounded-lg p-3 flex gap-2 items-start border-b border-secondary hover:border-none mt-1 motion-preset-slide-up"
     >
       <Image
         src={post.author.image}

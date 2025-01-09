@@ -9,7 +9,7 @@ const Navbar = async () => {
   const session = await auth();
   return (
     <div className="fixed w-full mt-5 px-5 z-50">
-      <div className="max-w-3xl w-full outline outline-muted/40 mx-auto px-4 py-3 flex items-center justify-between backdrop-blur-sm bg-secondary/30 rounded-3xl">
+      <div className="max-w-3xl w-full outline outline-muted/40 mx-auto px-4 py-3 flex items-center justify-between backdrop-blur-sm bg-secondary/30 rounded-3xl motion-preset-fade">
         <Link href="/" className="relative">
           <Image
             src="/logo.png"
