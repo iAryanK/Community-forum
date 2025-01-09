@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import TrendingPosts from "@/components/TrendingPosts";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import Image from "next/image";
+import NextTopLoader from "nextjs-toploader";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -41,21 +42,22 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <NextTopLoader showSpinner={false} />
           <Navbar />
 
-          <div className="grow">
+          <div>
             <Image
               src="./bg.svg"
               alt="background"
-              width={10000}
-              height={10000}
+              width={1000}
+              height={1000}
               className="bg-cover fill-black w-full inset-0 z-[-2] absolute gradient-fade dark:hidden"
             />
             <Image
               src="./bg-dark.svg"
               alt="background"
-              width={10000}
-              height={10000}
+              width={1000}
+              height={1000}
               className="bg-cover invert opacity-30 w-full inset-0 z-[-2] absolute gradient-fade hidden dark:flex"
             />
 
