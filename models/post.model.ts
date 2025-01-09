@@ -1,0 +1,23 @@
+import { Schema, model, models, Document } from "mongoose";
+
+export interface IPost extends Document {
+  title: string;
+  content: string;
+  views: number;
+  author: Schema.Types.ObjectId;
+  comments: Schema.Types.ObjectId[];
+  createdAt: Date;
+}
+
+const PostSchema = new Schema({
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  views: { type: Number, default: 0 },
+  author: { type: Schema.Types.ObjectId, ref: "User" },
+  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+  createdAt: { type: Date, default: Date.now },
+});
+
+const Post = models.Post || model<IPost>("Post", PostSchema);
+
+export default Post;

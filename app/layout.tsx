@@ -6,6 +6,7 @@ import UserProfile from "@/components/UserProfile";
 import Footer from "@/components/Footer";
 import TrendingPosts from "@/components/TrendingPosts";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import Image from "next/image";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -40,20 +41,38 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="max-w-5xl h-full mx-auto">
-            <Navbar />
-            <div className="flex h-full w-full">
-              {children}
-              <div className="max-md:hidden">
-                <UserProfile />
+          <Navbar />
+
+          <div className="grow">
+            <Image
+              src="./bg.svg"
+              alt="background"
+              width={10000}
+              height={10000}
+              className="bg-cover fill-black w-full inset-0 z-[-2] absolute gradient-fade dark:hidden"
+            />
+            <Image
+              src="./bg-dark.svg"
+              alt="background"
+              width={10000}
+              height={10000}
+              className="bg-cover invert opacity-30 w-full inset-0 z-[-2] absolute gradient-fade hidden dark:flex"
+            />
+
+            <main className="max-w-5xl h-full mx-auto pt-20">
+              <div className="flex h-full w-full">
+                {children}
+                <div className="max-md:hidden">
+                  <UserProfile />
+                  <TrendingPosts />
+                </div>
+              </div>
+              <div className="md:hidden">
                 <TrendingPosts />
               </div>
-            </div>
-            <div className="md:hidden">
-              <TrendingPosts />
-            </div>
-            <Footer />
-          </main>
+              <Footer />
+            </main>
+          </div>
         </ThemeProvider>
       </body>
     </html>

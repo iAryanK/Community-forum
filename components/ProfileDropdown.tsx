@@ -14,7 +14,6 @@ import Logout from "./Logout";
 
 const ProfileDropdown = async () => {
   const session = await auth();
-  console.log(session);
 
   return (
     <DropdownMenu>
