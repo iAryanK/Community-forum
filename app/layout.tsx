@@ -61,7 +61,7 @@ export default function RootLayout({
               className="bg-cover invert opacity-30 w-full inset-0 z-[-2] absolute gradient-fade hidden dark:flex"
             />
 
-            <main className="max-w-5xl h-full mx-auto pt-20">
+            <main className="max-w-5xl h-full mx-auto pt-28">
               <div className="flex h-full w-full">
                 {children}
                 <div className="max-md:hidden">

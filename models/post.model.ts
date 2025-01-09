@@ -10,8 +10,8 @@ export interface IPost extends Document {
 }
 
 const PostSchema = new Schema({
-  title: { type: String, required: true },
-  content: { type: String, required: true },
+  title: { type: String },
+  content: { type: String },
   views: { type: Number, default: 0 },
   author: { type: Schema.Types.ObjectId, ref: "User" },
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
