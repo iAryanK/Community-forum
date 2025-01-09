@@ -10,7 +10,7 @@ const Navbar = async () => {
   return (
     <div className="fixed w-full mt-5 px-5 z-50">
       <div className="max-w-3xl w-full outline outline-muted/40 mx-auto px-4 py-3 flex items-center justify-between backdrop-blur-sm bg-secondary/30 rounded-3xl">
-        <Link href="/">
+        <Link href="/" className="relative">
           <Image
             src="/logo.png"
             alt="logo"
@@ -19,6 +19,9 @@ const Navbar = async () => {
             className="dark:invert"
             priority
           />
+          <p className="uppercase text-[10px] absolute -bottom-2 right-0 tracking-wide font-geist_mono text-secondary-foreground">
+            Community
+          </p>
         </Link>
 
         <div className="flex items-center gap-2">

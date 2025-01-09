@@ -34,7 +34,10 @@ export default function Popover({ authorId }: { authorId: string }) {
   });
 
   const handleSubmit = async () => {
+    if (!inputData.title || !inputData.content) return;
+
     setIsLoading(true);
+
     await createPost({ ...inputData, authorId });
 
     closeMenu();
