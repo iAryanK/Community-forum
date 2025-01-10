@@ -57,3 +57,15 @@ export const fetchTrendingPosts = async () => {
     console.log("[FETCH TRENDING POSTS ERROR]", error);
   }
 };
+
+export const fetchPostById = async (id: string) => {
+  try {
+    await connectToDB();
+
+    const post = await Post.findById(id).populate("author");
+
+    return post;
+  } catch (error) {
+    console.log("[FETCH POST BY ID ERROR", error);
+  }
+};
