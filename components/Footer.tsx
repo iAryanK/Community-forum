@@ -1,7 +1,26 @@
+import Image from "next/image";
+import Link from "next/link";
+
 const Footer = () => {
   return (
-    <div className="m-4 p-4 backdrop-blur-sm bg-secondary/30 rounded-lg">
-      Footer
+    <div className="m-4 p-4 backdrop-blur-sm bg-secondary/30 rounded-lg flex items-center justify-between motion-preset-fade">
+      <p className="text-sm opacity-70">
+        © {new Date().getFullYear()} All rights reserved.
+      </p>
+      <Link
+        href="https://exadata.in"
+        target="_blank"
+        className="relative hover:motion-preset-confetti w-fit"
+      >
+        <Image
+          src="/logo.png"
+          alt="logo"
+          width={60}
+          height={20}
+          className="dark:invert"
+          priority
+        />
+      </Link>
     </div>
   );
 };
