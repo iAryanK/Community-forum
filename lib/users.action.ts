@@ -52,3 +52,15 @@ export const fetchPostOfUser = async (id: string) => {
     return [];
   }
 };
+
+export const fetchSavedPosts = async (id: string) => {
+  try {
+    await connectToDB();
+
+    const res = await User.findById(id).populate("saved").select("saved");
+
+    return res;
+  } catch (error) {
+    console.log("[FETCH SAVED POSTS ERROR]", error);
+  }
+};

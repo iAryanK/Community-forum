@@ -36,11 +36,13 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           />
           <p>{post.author.name}</p>
         </Link>
-        <ToggleSavePost
-          postId={JSON.stringify(post._id)}
-          authorId={JSON.stringify(post.author._id)}
-          hasSaved={user && user.saved.includes(post._id)}
-        />
+        <div>
+          <ToggleSavePost
+            postId={JSON.stringify(post._id)}
+            userId={user && JSON.stringify(user._id)}
+            hasSaved={user && user.saved.includes(post._id)}
+          />
+        </div>
       </div>
 
       <h2 className="text-xl font-semibold mb-2">{post.title}</h2>

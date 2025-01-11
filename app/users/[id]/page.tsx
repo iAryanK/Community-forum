@@ -1,8 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { auth } from "@/auth";
 import PostCard from "@/components/PostCard";
-import { fetchPostOfUser, fetchUserData } from "@/lib/users.action";
+import {
+  fetchPostOfUser,
+  fetchSavedPosts,
+  fetchUserData,
+} from "@/lib/users.action";
 import { getTimestamp } from "@/lib/utils";
 import Image from "next/image";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
@@ -10,6 +16,13 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   const user = await fetchUserData(id);
   const userPosts = await fetchPostOfUser(id);
+
+  let savedPosts = [];
+  if (session?.user?.id === id) {
+    console.log("[fetchSavedPosts]", id);
+
+    savedPosts = await fetchSavedPosts(id);
+  }
 
   return (
     <div className="m-4 h-fit w-full rounded-lg">
@@ -51,15 +64,45 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           </p>
         )}
       </div>
-      <p className="my-2 text-xl font-semibold font-geist_mono">
-        Posts by {user.email === session?.user?.email ? "You" : `${user.name}`}
-      </p>
-      <hr className="w-1/2" />
-      <div className="flex flex-col gap-1">
-        {userPosts.map((post) => (
-          <PostCard key={post._id} post={post} />
-        ))}
-      </div>
+      {session?.user?.id !== id ? (
+        <div>
+          <p className="my-2 text-xl font-semibold font-geist_mono">
+            Posts by{" "}
+            {user.email === session?.user?.email ? "You" : `${user.name}`}
+          </p>
+          <hr className="w-1/2" />
+          <div className="flex flex-col gap-1">
+            {userPosts.map((post) => (
+              <PostCard key={post._id} post={post} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <Tabs defaultValue="your_posts" className="w-full">
+          <TabsList className="w-full">
+            <TabsTrigger value="your_posts" className="w-full">
+              Your Posts
+            </TabsTrigger>
+            <TabsTrigger value="saved_posts" className="w-full">
+              Saved Posts
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="your_posts">
+            <div className="flex flex-col gap-1">
+              {userPosts.map((post) => (
+                <PostCard key={post._id} post={post} />
+              ))}
+            </div>
+          </TabsContent>
+          <TabsContent value="saved_posts">
+            <div className="flex flex-col gap-1">
+              {savedPosts.saved.map((post: any) => (
+                <PostCard key={post._id} post={post} />
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
+      )}
     </div>
   );
 };

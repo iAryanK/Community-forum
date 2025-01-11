@@ -5,6 +5,7 @@ import { savePost } from "@/lib/posts.action";
 import { Star, ThumbsDown, ThumbsUp } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { downvoteComment, upvoteComment } from "@/lib/comments.action";
+import { useState } from "react";
 
 const LikePostComment = ({
   upvotes,
@@ -59,12 +60,12 @@ const DislikePostComment = ({
   const { toast } = useToast();
 
   const handleDislikePost = async () => {
-    if (!session?.user?.id) {
+    if (!session) {
       return toast({
         title: "You are not logged in !",
         description: "Please login to react on a comment.",
       });
-    } else {
+    } else if (session.user?.id) {
       await downvoteComment(session.user.id, commentId, postId);
     }
   };
@@ -85,33 +86,46 @@ const DislikePostComment = ({
 
 const ToggleSavePost = ({
   postId,
-  authorId,
+  userId,
   hasSaved,
 }: {
   postId: string;
-  authorId: string;
+  userId?: string;
   hasSaved?: boolean;
 }) => {
   const { data: session } = useSession();
   const { toast } = useToast();
+  const [isSaved, setIsSaved] = useState(hasSaved);
 
   const handleSavePost = async () => {
-    if (!session) {
+    if (!session || !userId) {
       return toast({
         title: "You are not logged in !",
         description: "Please login to bookmark the post.",
       });
     }
 
-    await savePost(postId, authorId);
+    setIsSaved(!isSaved); // Optimistic update
+
+    try {
+      await savePost(postId, userId);
+    } catch {
+      setIsSaved(hasSaved);
+
+      toast({
+        title: "Error",
+        description: "Failed to save the post. Please try again.",
+      });
+    }
   };
 
   return (
-    <Star
-      onClick={handleSavePost}
-      fill={hasSaved ? "#f59e0b" : "none"}
-      className={`cursor-pointer ${hasSaved && "text-amber-500"}`}
-    />
+    <button className="hover:scale-105" onClick={handleSavePost}>
+      <Star
+        fill={isSaved ? "#f59e0b" : "none"}
+        className={`cursor-pointer ${isSaved && "text-amber-500"}`}
+      />
+    </button>
   );
 };
 
