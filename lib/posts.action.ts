@@ -14,7 +14,6 @@ interface CreatePostType {
 
 export const createPost = async (data: CreatePostType) => {
   try {
-    console.log("[CREATE POST]");
     const { title, content, authorId } = data;
 
     await connectToDB();
@@ -33,13 +32,34 @@ export const createPost = async (data: CreatePostType) => {
   }
 };
 
-export const fetchAllPosts = async () => {
+export const fetchAllPosts = async ({
+  filter,
+}: {
+  filter: string | string[] | undefined;
+}) => {
   try {
     await connectToDB();
 
-    const posts = await Post.find({})
-      .populate("author")
-      .sort({ createdAt: -1 });
+    let sortOptions = {};
+    let query = {};
+    switch (filter) {
+      case "newest":
+        sortOptions = { createdAt: -1 };
+        break;
+
+      case "most_viewed":
+        sortOptions = { views: -1 };
+        break;
+
+      case "uncommented":
+        query = { comments: { $size: 0 } };
+        break;
+
+      default:
+        break;
+    }
+
+    const posts = await Post.find(query).populate("author").sort(sortOptions);
 
     return posts;
   } catch (error) {

@@ -5,8 +5,6 @@ import { Eye, MessageSquareText } from "lucide-react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PostCard = ({ post, showImage }: { post: any; showImage?: boolean }) => {
-  console.log(post);
-
   return (
     <Link
       href={`/posts/${post._id}`}

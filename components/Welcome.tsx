@@ -6,7 +6,7 @@ const Welcome = async () => {
 
   if (!session)
     return (
-      <div className="parent">
+      <div className="parent motion-preset-seesaw motion-loop-once">
         <div className="card">
           <div className="logo">
             <span className="circle circle1"></span>
@@ -15,7 +15,7 @@ const Welcome = async () => {
             <span className="circle circle4"></span>
             <span className="circle circle5">
               <HeartPulse
-                color="#eee"
+                color="#ffffff66"
                 strokeWidth={2}
                 size={30}
                 className="motion-preset-pulse-sm"
