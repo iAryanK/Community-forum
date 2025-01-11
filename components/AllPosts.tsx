@@ -8,7 +8,7 @@ const AllPosts = async () => {
     <div className="">
       {posts &&
         posts.length > 0 &&
-        posts.map((post) => <PostCard key={post._id} post={post} />)}
+        posts.map((post) => <PostCard key={post._id} post={post} showImage />)}
     </div>
   );
 };

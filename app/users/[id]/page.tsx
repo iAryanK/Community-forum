@@ -1,0 +1,64 @@
+import { auth } from "@/auth";
+import PostCard from "@/components/PostCard";
+import { fetchPostOfUser, fetchUserData } from "@/lib/users.action";
+import { getTimestamp } from "@/lib/utils";
+import Image from "next/image";
+
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const id = (await params).id;
+  const session = await auth();
+
+  const user = await fetchUserData(id);
+  const userPosts = await fetchPostOfUser(id);
+
+  return (
+    <div className="m-4 h-fit w-full rounded-lg">
+      <div className="p-4 border-2 border-dashed h-48 rounded-lg flex flex-col gap-4 items-start justify-between backdrop-blur-sm bg-secondary/30 mb-4">
+        <div className="flex gap-2 items-center">
+          {user.image ? (
+            <Image
+              src={user.image}
+              alt="pic"
+              width={200}
+              height={200}
+              className="p-1 rounded-full h-28 w-28 "
+            />
+          ) : (
+            <div className="rounded-full h-28 w-28 bg-secondary-foreground"></div>
+          )}
+
+          <div className="w-full flex flex-col gap-4">
+            <div>
+              <h2 className="font-lg text-lg font-geist_mono">{user.name}</h2>
+              <p className="text-sm font-geist_mono opacity-50">
+                {session?.user?.email == user.email && user.email}
+              </p>
+              <div className="">
+                <p className="pt-4 text-sm">
+                  {userPosts.length} posts created.
+                </p>
+                <p className="pt-1 opacity-60 text-sm">
+                  - Joined {getTimestamp(user.joinedAt)}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {session && (
+          <p className="text-sm text-zinc-400 dark:text-zinc-600 ml-5">
+            * Your email ID is only visible to you.
+          </p>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-1">
+        {userPosts.map((post) => (
+          <PostCard key={post._id} post={post} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Page;

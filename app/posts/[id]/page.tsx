@@ -12,6 +12,7 @@ import Image from "next/image";
 import CreateComment from "@/components/CreateComment";
 import { getCommentById } from "@/lib/comments.action";
 import { auth } from "@/auth";
+import Link from "next/link";
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
@@ -22,7 +23,10 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <div className="m-4 p-4 w-full backdrop-blur-sm bg-secondary/30 rounded-lg">
       <div className="flex items-center justify-between mb-4">
-        <div className="flex gap-4 items-center">
+        <Link
+          href={`/users/${post.author._id}`}
+          className="flex gap-4 items-center"
+        >
           <Image
             src={post.author.image}
             alt={post.author.name}
@@ -31,11 +35,11 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             className="rounded-full"
           />
           <p>{post.author.name}</p>
-        </div>
+        </Link>
         <ToggleSavePost
           postId={JSON.stringify(post._id)}
           authorId={JSON.stringify(post.author._id)}
-          hasSaved={user.saved.includes(post._id)}
+          hasSaved={user && user.saved.includes(post._id)}
         />
       </div>
 

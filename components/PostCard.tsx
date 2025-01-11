@@ -4,19 +4,23 @@ import Link from "next/link";
 import { Eye, MessageSquareText } from "lucide-react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const PostCard = ({ post }: { post: any }) => {
+const PostCard = ({ post, showImage }: { post: any; showImage?: boolean }) => {
+  console.log(post);
+
   return (
     <Link
       href={`/posts/${post._id}`}
       className="hover:bg-secondary/50 hover:rounded-lg p-3 flex gap-2 items-start border-b border-secondary hover:border-none mt-1 motion-preset-slide-up"
     >
-      <Image
-        src={post.author.image}
-        alt={post.title}
-        width={100}
-        height={100}
-        className="rounded-full h-12 w-12"
-      />
+      {showImage && (
+        <Image
+          src={post.author.image}
+          alt={post.title}
+          width={100}
+          height={100}
+          className="rounded-full h-12 w-12"
+        />
+      )}
       <div className="w-full space-y-1">
         <h4 className="text-amber-500">{post.author.name}</h4>
         <h5 className="text-lg">{post.title}</h5>

@@ -34,7 +34,7 @@ const LikePostComment = ({
     <button className="flex gap-2 items-center" onClick={handleLikePost}>
       <ThumbsUp
         size={20}
-        fill={hasUpvoted ? "#f59e0b" : ""}
+        fill={hasUpvoted ? "#f59e0b" : "none"}
         className={`cursor-pointer hover:scale-105 duration-200 ease-in-out ${
           hasUpvoted && "text-amber-500"
         }`}
@@ -73,7 +73,7 @@ const DislikePostComment = ({
     <button className="flex gap-2 items-center" onClick={handleDislikePost}>
       <ThumbsDown
         size={20}
-        fill={hasDownvoted ? "#f59e0b" : ""}
+        fill={hasDownvoted ? "#f59e0b" : "none"}
         className={`cursor-pointer hover:scale-105 duration-200 ease-in-out ${
           hasDownvoted && "text-amber-500"
         }`}
@@ -90,7 +90,7 @@ const ToggleSavePost = ({
 }: {
   postId: string;
   authorId: string;
-  hasSaved: boolean;
+  hasSaved?: boolean;
 }) => {
   const { data: session } = useSession();
   const { toast } = useToast();
@@ -109,7 +109,7 @@ const ToggleSavePost = ({
   return (
     <Star
       onClick={handleSavePost}
-      fill={hasSaved ? "#f59e0b" : ""}
+      fill={hasSaved ? "#f59e0b" : "none"}
       className={`cursor-pointer ${hasSaved && "text-amber-500"}`}
     />
   );
