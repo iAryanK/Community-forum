@@ -65,6 +65,11 @@ export const fetchPostById = async (id: string) => {
 
     const post = await Post.findById(id).populate("author");
 
+    // Increment the views
+    await Post.findByIdAndUpdate(id, {
+      $inc: { views: 1 },
+    });
+
     return post;
   } catch (error) {
     console.log("[FETCH POST BY ID ERROR", error);

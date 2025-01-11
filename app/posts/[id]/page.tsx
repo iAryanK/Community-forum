@@ -80,7 +80,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
 export default Page;
 
-export const CommentCard = async ({
+const CommentCard = async ({
   commentId,
   postId,
 }: {
