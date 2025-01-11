@@ -61,7 +61,7 @@ export default function Popover({ authorId }: { authorId: string }) {
 
   return (
     <MotionConfig transition={TRANSITION}>
-      <div className="flex items-center justify-center">
+      <div className="flex flex-col items-center justify-center ">
         <motion.button
           key="button"
           layoutId={`popover-${uniqueId}`}
@@ -81,7 +81,7 @@ export default function Popover({ authorId }: { authorId: string }) {
             <motion.div
               ref={formContainerRef}
               layoutId={`popover-${uniqueId}`}
-              className="absolute z-50 md:top-[20%] h-[200px] left-0 right-0 mx-auto w-[364px] md:h-[400px] md:w-[700px] shrink overflow-hidden border border-zinc-950/10 bg-white outline-none dark:bg-zinc-800"
+              className="relative h-[400px] left-0 mx-auto w-full shrink overflow-hidden border border-zinc-950/10 bg-white outline-none dark:bg-zinc-800"
               style={{
                 borderRadius: 12,
               }}

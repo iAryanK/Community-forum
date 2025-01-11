@@ -4,6 +4,7 @@ import Post from "@/models/post.model";
 import { connectToDB } from "./db";
 import console from "console";
 import { revalidatePath } from "next/cache";
+import User from "@/models/user.model";
 
 interface CreatePostType {
   title: string;
@@ -67,5 +68,30 @@ export const fetchPostById = async (id: string) => {
     return post;
   } catch (error) {
     console.log("[FETCH POST BY ID ERROR", error);
+  }
+};
+
+export const savePost = async (postId: string, authorId: string) => {
+  try {
+    await connectToDB();
+
+    const isSaved = await User.findById(JSON.parse(authorId)).then((user) =>
+      user.saved.includes(JSON.parse(postId))
+    );
+
+    if (isSaved) {
+      await User.findByIdAndUpdate(JSON.parse(authorId), {
+        $pull: { saved: JSON.parse(postId) },
+      });
+    } else {
+      await User.findByIdAndUpdate(JSON.parse(authorId), {
+        $push: { saved: JSON.parse(postId) },
+      });
+    }
+
+    revalidatePath(`/posts/${postId}`);
+  } catch (error) {
+    console.log("[SAVE POST ERROR]", error);
+    return false;
   }
 };

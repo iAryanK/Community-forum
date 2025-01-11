@@ -14,7 +14,9 @@ const CreatePost = async () => {
         talk about, related to big data and its impact on sectors like
         healthcare ?
       </p>
-      <Popover authorId={session?.user?.id as unknown as string} />
+      <div className="w-full">
+        <Popover authorId={session?.user?.id as unknown as string} />
+      </div>
     </div>
   );
 };

@@ -1,46 +1,23 @@
-import { Button } from "@/components/ui/button";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { fetchPostById } from "@/lib/posts.action";
-import { formatDate, formatNumber, getTimestamp } from "@/lib/utils";
+import { fetchUserById } from "@/lib/users.action";
 import {
-  Clock,
-  Eye,
-  MessageSquareText,
-  Star,
-  ThumbsDown,
-  ThumbsUp,
-} from "lucide-react";
+  DislikePostComment,
+  LikePostComment,
+  ToggleSavePost,
+} from "@/components/PostFeatures";
+import { formatDate, formatNumber, getTimestamp } from "@/lib/utils";
+import { Clock, Eye, MessageSquareText } from "lucide-react";
 import Image from "next/image";
+import CreateComment from "@/components/CreateComment";
+import { getCommentById } from "@/lib/comments.action";
+import { auth } from "@/auth";
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
   const post = await fetchPostById(id);
-
-  const dummyComment = [
-    {
-      _id: "1",
-      content:
-        "This is a comment content. This is also a comment. and this is fore sure a comment",
-      upvotes: 10,
-      downvotes: 2,
-      createdAt: new Date(),
-      author: {
-        name: "John Doe",
-        image: "/google.svg",
-      },
-    },
-    {
-      _id: "2",
-      content:
-        "This is a comment content. This is also a comment. and this is fore sure a comment",
-      upvotes: 10,
-      downvotes: 2,
-      createdAt: new Date(),
-      author: {
-        name: "John Doe",
-        image: "/google.svg",
-      },
-    },
-  ];
+  const session = await auth();
+  const user = await fetchUserById(session?.user?.id);
 
   return (
     <div className="m-4 p-4 w-full backdrop-blur-sm bg-secondary/30 rounded-lg">
@@ -55,7 +32,11 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           />
           <p>{post.author.name}</p>
         </div>
-        <Star />
+        <ToggleSavePost
+          postId={JSON.stringify(post._id)}
+          authorId={JSON.stringify(post.author._id)}
+          hasSaved={user.saved.includes(post._id)}
+        />
       </div>
 
       <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
@@ -74,24 +55,23 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
       <h3 className="font-light">{post.content}</h3>
 
       <div className="py-5 text-amber-500 text-lg">
-        {formatNumber(post.comments.length)} Comments
+        {formatNumber(post.comments.length)}{" "}
+        {post.comments.length > 1 ? "Comments" : "Comment"}
       </div>
 
-      <textarea
-        placeholder="Add a comment"
-        className="w-full p-2 border border-secondary rounded-lg"
+      <CreateComment
+        authorId={JSON.stringify(post.author._id)}
+        postId={JSON.stringify(post._id)}
       />
-      <Button
-        variant={"secondary"}
-        className="mt-2 w-full font-geist_mono text-base"
-      >
-        Comment
-      </Button>
 
       <div className="mt-8 space-y-5">
         <div className="text-lg text-amber-500">All Comments</div>
-        {dummyComment.map((comment) => (
-          <CommentCard key={comment._id} comment={comment} />
+        {post.comments.map((comment: any) => (
+          <CommentCard
+            key={comment._id}
+            commentId={comment}
+            postId={JSON.stringify(post._id)}
+          />
         ))}
       </div>
     </div>
@@ -100,7 +80,16 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
 export default Page;
 
-export const CommentCard = ({ comment }: { comment: any }) => {
+export const CommentCard = async ({
+  commentId,
+  postId,
+}: {
+  commentId: any;
+  postId: string;
+}) => {
+  const comment = await getCommentById(commentId);
+  const session = await auth();
+
   return (
     <div className="p-2">
       <div className="flex justify-between items-center">
@@ -115,14 +104,18 @@ export const CommentCard = ({ comment }: { comment: any }) => {
           <p>{comment.author.name}</p>
         </div>
         <div className="flex gap-4">
-          <button className="flex gap-2 items-center">
-            <ThumbsUp size={20} />
-            {comment.upvotes}
-          </button>
-          <button className="flex gap-2 items-center">
-            <ThumbsDown size={20} />
-            {comment.downvotes}
-          </button>
+          <LikePostComment
+            upvotes={comment.upvotes.length}
+            postId={postId}
+            commentId={JSON.stringify(comment._id)}
+            hasUpvoted={comment.upvotes.includes(session?.user?.id)}
+          />
+          <DislikePostComment
+            downvotes={comment.downvotes.length}
+            postId={postId}
+            commentId={JSON.stringify(comment._id)}
+            hasDownvoted={comment.downvotes.includes(session?.user?.id)}
+          />
         </div>
       </div>
       <p className="pt-4 pb-2 font-light">{comment.content}</p>
