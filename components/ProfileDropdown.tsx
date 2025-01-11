@@ -11,6 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { User } from "lucide-react";
 import Logout from "./Logout";
+import Link from "next/link";
 
 const ProfileDropdown = async () => {
   const session = await auth();
@@ -44,9 +45,11 @@ const ProfileDropdown = async () => {
       <DropdownMenuContent className="mr-8">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <User /> Profile
-        </DropdownMenuItem>
+        <Link href={`/users/${session?.user?.id}`}>
+          <DropdownMenuItem className="cursor-pointer hover:bg-secondary">
+            <User /> Profile
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuItem asChild>
           <Logout />
         </DropdownMenuItem>

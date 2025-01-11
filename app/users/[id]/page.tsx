@@ -13,7 +13,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <div className="m-4 h-fit w-full rounded-lg">
-      <div className="p-4 border-2 border-dashed h-48 rounded-lg flex flex-col gap-4 items-start justify-between backdrop-blur-sm bg-secondary/30 mb-4">
+      <div className="p-4 border-2 border-dashed h-48 rounded-lg flex flex-col gap-4 items-start justify-between backdrop-blur-sm bg-secondary/30 mb-5">
         <div className="flex gap-2 items-center">
           {user.image ? (
             <Image
@@ -33,7 +33,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
               <p className="text-sm font-geist_mono opacity-50">
                 {session?.user?.email == user.email && user.email}
               </p>
-              <div className="">
+              <div>
                 <p className="pt-4 text-sm">
                   {userPosts.length} posts created.
                 </p>
@@ -51,7 +51,10 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           </p>
         )}
       </div>
-
+      <p className="my-2 text-xl font-semibold font-geist_mono">
+        Posts by {user.email === session?.user?.email ? "You" : `${user.name}`}
+      </p>
+      <hr className="w-1/2" />
       <div className="flex flex-col gap-1">
         {userPosts.map((post) => (
           <PostCard key={post._id} post={post} />

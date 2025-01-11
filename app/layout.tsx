@@ -6,10 +6,11 @@ import UserProfile from "@/components/UserProfile";
 import Footer from "@/components/Footer";
 import TrendingPosts from "@/components/TrendingPosts";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import Image from "next/image";
+// import Image from "next/image";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "@/components/ui/toaster";
 import { SessionProvider } from "next-auth/react";
+import Bg from "@/components/Bg";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -45,23 +46,13 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SessionProvider>
+            <div className="w-screen">
+              <Bg />
+            </div>
             <NextTopLoader showSpinner={false} />
-            <Navbar />
+
             <div>
-              <Image
-                src="./bg.svg"
-                alt="background"
-                width={1000}
-                height={1000}
-                className="bg-cover fill-black w-full inset-0 z-[-2] absolute gradient-fade dark:hidden"
-              />
-              <Image
-                src="./bg-dark.svg"
-                alt="background"
-                width={1000}
-                height={1000}
-                className="bg-cover invert opacity-30 w-full inset-0 z-[-2] absolute gradient-fade hidden dark:flex"
-              />
+              <Navbar />
 
               <main className="max-w-5xl h-full mx-auto pt-28">
                 <div className="flex h-full w-full">

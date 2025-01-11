@@ -2,7 +2,7 @@ import { auth, signIn } from "@/auth";
 import { fetchUser } from "@/lib/users.action";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { Pencil } from "lucide-react";
+import { Smile } from "lucide-react";
 import Link from "next/link";
 
 const UserProfile = async () => {
@@ -34,8 +34,8 @@ const UserProfile = async () => {
                 className="p-1 rounded-full"
               />
             )}
-            <div className="absolute dark:bg-zinc-300 bg-zinc-800 text-white dark:text-black rounded-full p-2 bottom-2 right-0">
-              <Pencil size={16} />
+            <div className="absolute dark:bg-zinc-300 bg-zinc-800 text-white dark:text-black rounded-full p-1 bottom-2 right-0">
+              <Smile size={16} />
             </div>
           </div>
 
@@ -46,7 +46,7 @@ const UserProfile = async () => {
             className="w-full tracking-wide font-geist_mono bg-gradient-to-r from-amber-500 to-amber-300"
             asChild
           >
-            <Link href={`/users/${user._id}`}>Edit Profile</Link>
+            <Link href={`/users/${user._id}`}>View Profile</Link>
           </Button>
         </div>
       </div>
