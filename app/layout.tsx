@@ -57,7 +57,7 @@ export default function RootLayout({
               <main className="max-w-6xl h-full mx-auto pt-28">
                 <div className="flex h-full w-full">
                   {children}
-                  <div className="max-md:hidden w-96">
+                  <div className="max-md:hidden">
                     <UserProfile />
                     <TrendingPosts />
                   </div>
