@@ -58,7 +58,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
         </div>
 
-        {session && (
+        {session?.user?.id === id && (
           <p className="text-sm text-zinc-400 dark:text-zinc-600 ml-5">
             * Your email ID is only visible to you.
           </p>

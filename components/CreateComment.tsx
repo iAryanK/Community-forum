@@ -6,13 +6,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useSession } from "next-auth/react";
 
-const CreateComment = ({
-  authorId,
-  postId,
-}: {
-  authorId: string;
-  postId: string;
-}) => {
+const CreateComment = ({ postId }: { postId: string }) => {
   const [content, setContent] = useState("");
   const { toast } = useToast();
   const { data: session } = useSession();
@@ -29,7 +23,11 @@ const CreateComment = ({
 
     if (!content) return;
 
-    const res = await createComment(authorId, postId, content);
+    const res = await createComment(
+      session.user?.id as string,
+      postId,
+      content
+    );
 
     if (!res) {
       return toast({

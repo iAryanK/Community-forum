@@ -6,7 +6,7 @@ const TrendingPosts = async () => {
   const posts = await fetchTrendingPosts();
 
   return (
-    <div className="m-4 p-4 md:w-60  backdrop-blur-sm bg-secondary/30 rounded-lg space-y-2 text-sm md:motion-preset-slide-left max-md:motion-preset-slide-up">
+    <div className="m-4 p-4 w-full backdrop-blur-sm bg-secondary/30 rounded-lg space-y-2 text-sm md:motion-preset-slide-left max-md:motion-preset-slide-up">
       <div className="text-lg tracking-wide font-geist_mono mb-2 flex gap-4 items-center motion-preset-typewriter-[20] motion-duration-[4s] w-fit motion-loop-[1.5]">
         Trending Posts...
       </div>

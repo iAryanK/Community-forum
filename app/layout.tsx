@@ -54,10 +54,10 @@ export default function RootLayout({
             <div>
               <Navbar />
 
-              <main className="max-w-5xl h-full mx-auto pt-28">
+              <main className="max-w-6xl h-full mx-auto pt-28">
                 <div className="flex h-full w-full">
                   {children}
-                  <div className="max-md:hidden">
+                  <div className="max-md:hidden w-96">
                     <UserProfile />
                     <TrendingPosts />
                   </div>

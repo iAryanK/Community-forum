@@ -14,7 +14,7 @@ const createComment = async (
     await connectToDB();
 
     const createdComment = await Comment.create({
-      author: JSON.parse(authorId),
+      author: authorId,
       content: comment,
     });
 

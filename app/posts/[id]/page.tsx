@@ -65,10 +65,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         {post.comments.length > 1 ? "Comments" : "Comment"}
       </div>
 
-      <CreateComment
-        authorId={JSON.stringify(post.author._id)}
-        postId={JSON.stringify(post._id)}
-      />
+      <CreateComment postId={JSON.stringify(post._id)} />
 
       <div className="mt-8 space-y-5">
         <div className="text-lg text-amber-500">All Comments</div>
@@ -94,6 +91,7 @@ const CommentCard = async ({
   postId: string;
 }) => {
   const comment = await getCommentById(commentId);
+
   const session = await auth();
 
   return (
