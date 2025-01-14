@@ -6,7 +6,7 @@ const Welcome = async () => {
 
   if (!session)
     return (
-      <div className="parent motion-preset-seesaw motion-loop-once">
+      <div className="parent motion-preset-seesaw-sm motion-loop-once">
         <div className="card">
           <div className="logo">
             <span className="circle circle1"></span>

@@ -2,9 +2,9 @@
 
 import Post from "@/models/post.model";
 import { connectToDB } from "./db";
-import console from "console";
 import { revalidatePath } from "next/cache";
 import User from "@/models/user.model";
+import Comment from "@/models/comment.model";
 
 interface CreatePostType {
   title: string;
@@ -117,6 +117,33 @@ export const savePost = async (postId: string, authorId: string) => {
     revalidatePath(`/posts/${postId}`);
   } catch (error) {
     console.log("[SAVE POST ERROR]", error);
+    return false;
+  }
+};
+
+export const deletePost = async (postId: string) => {
+  try {
+    await connectToDB();
+
+    const session = await Post.startSession();
+    session.startTransaction();
+
+    // Find the post and get its associated comment IDs
+    const post = await Post.findById(postId).session(session);
+
+    // Delete all comments associated with the post
+    await Comment.deleteMany({ _id: { $in: post.comments } }).session(session);
+
+    // Delete the post
+    await Post.findByIdAndDelete(postId).session(session);
+
+    // Commit the transaction
+    await session.commitTransaction();
+    session.endSession();
+
+    return true;
+  } catch (error) {
+    console.log("[DELETE POST ERROR]", error);
     return false;
   }
 };

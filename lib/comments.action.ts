@@ -96,4 +96,35 @@ const getCommentById = async (id: string) => {
   }
 };
 
-export { createComment, upvoteComment, downvoteComment, getCommentById };
+const deleteComment = async (id: string) => {
+  try {
+    await connectToDB();
+
+    const session = await Comment.startSession();
+    session.startTransaction();
+
+    try {
+      await Comment.findByIdAndDelete(id, { session });
+      await Post.updateMany({}, { $pull: { comments: id } }, { session });
+
+      await session.commitTransaction();
+      return true;
+    } catch (error) {
+      await session.abortTransaction();
+      throw error;
+    } finally {
+      session.endSession();
+    }
+  } catch (error) {
+    console.log("[DELETE COMMENT ERROR]", error);
+    return false;
+  }
+};
+
+export {
+  createComment,
+  upvoteComment,
+  downvoteComment,
+  getCommentById,
+  deleteComment,
+};

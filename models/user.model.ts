@@ -7,6 +7,7 @@ export interface IUser extends Document {
   bio?: string;
   portfolioWebsite?: string;
   saved: Schema.Types.ObjectId[];
+  isAdmin: boolean;
   joinedAt: Date;
 }
 
@@ -17,6 +18,7 @@ const UserSchema = new Schema({
   bio: { type: String },
   portfolioWebsite: { type: String },
   saved: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+  isAdmin: { type: Boolean, default: false},
   joinedAt: { type: Date, default: Date.now },
 });
 

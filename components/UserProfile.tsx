@@ -53,7 +53,7 @@ const UserProfile = async () => {
     );
 
   return (
-    <div className="m-4 p-4 h-fit w-60  backdrop-blur-sm bg-gradient-to-br from-amber-200/20 to-amber-500/20 rounded-lg">
+    <div className="m-4 p-4 h-fit w-80  backdrop-blur-sm bg-gradient-to-br from-amber-200/20 to-amber-500/20 rounded-lg">
       <div className="flex items-center flex-col">
         <Image
           src="https://github.com/shadcn.png"

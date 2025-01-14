@@ -13,6 +13,7 @@ import CreateComment from "@/components/CreateComment";
 import { getCommentById } from "@/lib/comments.action";
 import { auth } from "@/auth";
 import Link from "next/link";
+import DeletePost from "@/components/DeletePost";
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
@@ -57,6 +58,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         <p className="flex gap-2 items-center">
           <MessageSquareText size={16} /> {formatNumber(post.comments.length)}
         </p>
+        {session?.user?.isAdmin && <DeletePost contentId={post.id} />}
       </div>
       <h3 className="font-light">{post.content}</h3>
 
@@ -108,6 +110,9 @@ const CommentCard = async ({
           <p>{comment.author.name}</p>
         </div>
         <div className="flex gap-4">
+          {session?.user?.isAdmin && (
+            <DeletePost contentId={comment.id} isComment />
+          )}
           <LikePostComment
             upvotes={comment.upvotes.length}
             postId={postId}

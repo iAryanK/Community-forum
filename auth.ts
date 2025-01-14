@@ -26,15 +26,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         const db_user = await User.findOne({ email: user.email });
-
+        token.isAdmin = db_user.isAdmin;
         token.id = db_user._id;
       }
       return token;
     },
 
     async session({ session, token }) {
-      // @ts-expect-error : session type doesn't contain user.id by default
-      session.user.id = token.id;
+      session.user.id = token.id as string;
+      session.user.isAdmin = token.isAdmin;
+
       return session;
     },
   },
