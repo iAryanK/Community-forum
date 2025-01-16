@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import UserProfile from "@/components/UserProfile";
-import Footer from "@/components/Footer";
-import TrendingPosts from "@/components/TrendingPosts";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 // import Image from "next/image";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "@/components/ui/toaster";
 import { SessionProvider } from "next-auth/react";
-import Bg from "@/components/Bg";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -46,28 +41,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SessionProvider>
-            <div className="w-screen">
-              <Bg />
-            </div>
             <NextTopLoader showSpinner={false} />
 
-            <div>
-              <Navbar />
-
-              <main className="max-w-[90rem] h-full mx-auto pt-28">
-                <div className="flex h-full w-full">
-                  {children}
-                  <div className="max-md:hidden">
-                    <UserProfile />
-                    <TrendingPosts />
-                  </div>
-                </div>
-                <div className="md:hidden">
-                  <TrendingPosts />
-                </div>
-                <Footer />
-              </main>
-            </div>
+            {children}
             <Toaster />
           </SessionProvider>
         </ThemeProvider>

@@ -19,8 +19,6 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   let savedPosts = [];
   if (session?.user?.id === id) {
-    console.log("[fetchSavedPosts]", id);
-
     savedPosts = await fetchSavedPosts(id);
   }
 

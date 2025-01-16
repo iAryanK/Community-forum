@@ -1,0 +1,91 @@
+"use server";
+
+import Post from "@/models/post.model";
+import { connectToDB } from "./db";
+import User from "@/models/user.model";
+
+const countUsers = async () => {
+  try {
+    await connectToDB();
+
+    const count = await User.countDocuments();
+
+    return count;
+  } catch (error) {
+    console.log("[COUNT USERS ERROR]", error);
+  }
+};
+
+const countPosts = async () => {
+  try {
+    await connectToDB();
+
+    const count = await Post.countDocuments();
+
+    return count;
+  } catch (error) {
+    console.log("[COUNT POSTS ERROR]", error);
+  }
+};
+
+const fetchPostsToApprove = async () => {
+  try {
+    await connectToDB();
+
+    const posts = await Post.find({ isApproved: false }).populate("author");
+
+    return posts;
+  } catch (error) {
+    console.log("[FETCH POSTS TO APPROVE ERROR]", error);
+  }
+};
+
+const approvePost = async (postId: string) => {
+  try {
+    await connectToDB();
+
+    const post = await Post.findById(JSON.parse(postId));
+
+    post.isApproved = true;
+
+    post.save();
+
+    return true;
+  } catch (error) {
+    console.log("[APPROVE POST ERROR]", error);
+    return false;
+  }
+};
+
+const countPostsToApprove = async () => {
+  try {
+    await connectToDB();
+
+    const count = await Post.countDocuments({ isApproved: false });
+
+    return count;
+  } catch (error) {
+    console.log("[COUNT POSTS TO APPROVE ERROR]", error);
+  }
+};
+
+const fetchAllUsers = async () => {
+  try {
+    await connectToDB();
+
+    const users = await User.find();
+
+    return users;
+  } catch (error) {
+    console.log("[FETCH ALL USERS ERROR]", error);
+  }
+};
+
+export {
+  countUsers,
+  countPosts,
+  fetchPostsToApprove,
+  approvePost,
+  countPostsToApprove,
+  fetchAllUsers,
+};

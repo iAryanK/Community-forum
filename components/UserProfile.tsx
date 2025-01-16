@@ -43,7 +43,7 @@ const UserProfile = async () => {
 
           <Button
             variant="secondary"
-            className="w-full tracking-wide font-geist_mono bg-gradient-to-r from-amber-500 to-amber-300"
+            className="w-full tracking-wide font-geist_mono dark:bg-gradient-to-r dark:from-amber-500 dark:to-amber-300 text-white bg-[#272727] hover:bg-[#272727]/90"
             asChild
           >
             <Link href={`/users/${user._id}`}>View Profile</Link>

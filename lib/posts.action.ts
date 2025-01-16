@@ -59,6 +59,7 @@ export const fetchAllPosts = async ({
         break;
     }
 
+    query = { ...query, isApproved: true };
     const posts = await Post.find(query).populate("author").sort(sortOptions);
 
     return posts;
@@ -71,7 +72,9 @@ export const fetchTrendingPosts = async () => {
   try {
     await connectToDB();
 
-    const posts = await Post.find({}).sort({ views: -1 }).limit(5);
+    const posts = await Post.find({ isApproved: true })
+      .sort({ views: -1 })
+      .limit(5);
 
     return posts;
   } catch (error) {

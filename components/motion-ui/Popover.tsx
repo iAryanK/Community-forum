@@ -65,7 +65,7 @@ export default function Popover({ authorId }: { authorId: string }) {
         <motion.button
           key="button"
           layoutId={`popover-${uniqueId}`}
-          className="flex h-10 items-center border-none border-zinc-950/20 p-2 text-zinc-950 dark:border-zinc-50/20 dark:bg-zinc-800 dark:text-zinc-50 bg-gradient-to-r from-amber-600 to-amber-500 w-full justify-center"
+          className="flex h-10 items-center border-none border-zinc-950/20 p-2  dark:border-zinc-50/20 dark:bg-zinc-800 dark:text-zinc-50 dark:bg-gradient-to-r dark:from-amber-600 dark:to-amber-500 bg-[#272727] hover:bg-[#272727]/90 w-full justify-center text-white"
           style={{
             borderRadius: 8,
           }}
