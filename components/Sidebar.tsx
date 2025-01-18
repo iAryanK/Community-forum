@@ -41,7 +41,7 @@ const Sidebar = async () => {
       <SheetContent className="py-10  flex flex-col justify-between backdrop-blur-sm bg-secondary/90 overflow-y-scroll custom-scrollbar">
         <SheetTitle className="sr-only">Menu</SheetTitle>
         <SidebarContent>
-          <div className="overflow-y-scroll custom-scrollbar max-h-96 space-y-2 gradient-fade">
+          <div className="overflow-y-scroll custom-scrollbar max-h-96 min-h-60 space-y-2 gradient-fade">
             {notifications ? (
               notifications.map((notification: any, index: number) => (
                 <div

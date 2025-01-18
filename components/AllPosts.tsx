@@ -13,7 +13,7 @@ const AllPosts = async ({
   });
 
   return (
-    <div className="mt-5">
+    <div className="max-md:mt-5">
       <div className="flex justify-between items-center">
         <p className="text-xl font-semibold">All Posts</p>
         <Filter filters={postFilters} otherClasses="min-h-[50px]" />
