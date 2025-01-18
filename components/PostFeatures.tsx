@@ -123,7 +123,9 @@ const ToggleSavePost = ({
     <button className="hover:scale-105" onClick={handleSavePost}>
       <Star
         fill={isSaved ? "#f59e0b" : "none"}
-        className={`cursor-pointer ${isSaved && "text-amber-500"}`}
+        className={`cursor-pointer ${
+          isSaved && "text-amber-500 motion-preset-shake"
+        }`}
       />
     </button>
   );

@@ -55,6 +55,13 @@ const ProfileDropdown = async () => {
             <User /> Profile
           </DropdownMenuItem>
         </Link>
+        {session?.user?.isAdmin && (
+          <Link href={`/admin`} target="_blank">
+            <DropdownMenuItem className="cursor-pointer hover:bg-secondary">
+              <User /> Admin
+            </DropdownMenuItem>
+          </Link>
+        )}
         <DropdownMenuItem asChild>
           <Logout />
         </DropdownMenuItem>

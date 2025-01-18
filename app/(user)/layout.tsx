@@ -4,6 +4,7 @@ import UserProfile from "@/components/UserProfile";
 import Footer from "@/components/Footer";
 import TrendingPosts from "@/components/TrendingPosts";
 import Bg from "@/components/Bg";
+import CreatePost from "@/components/CreatePost";
 
 export const metadata: Metadata = {
   title: "Exadata Community",
@@ -30,6 +31,7 @@ export default function UserLayout({
             {children}
             <div className="max-md:hidden">
               <UserProfile />
+              <CreatePost />
               <TrendingPosts />
             </div>
           </div>

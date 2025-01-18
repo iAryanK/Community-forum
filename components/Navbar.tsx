@@ -1,9 +1,8 @@
 import Image from "next/image";
-import ThemeToggle from "./shared/ThemeToggle";
 import { Button } from "./ui/button";
 import { auth, signIn } from "@/auth";
-import ProfileDropdown from "./ProfileDropdown";
 import Link from "next/link";
+import Sidebar from "./Sidebar";
 
 const Navbar = async () => {
   const session = await auth();
@@ -25,10 +24,8 @@ const Navbar = async () => {
         </Link>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
-
           {session ? (
-            <ProfileDropdown />
+            <Sidebar />
           ) : (
             <form
               action={async () => {

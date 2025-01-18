@@ -12,7 +12,9 @@ export default async function Home({
   return (
     <div className="m-5 w-full">
       <Welcome />
-      <CreatePost />
+      <div className="md:hidden">
+        <CreatePost />
+      </div>
       <AllPosts search_param={search_param} />
     </div>
   );

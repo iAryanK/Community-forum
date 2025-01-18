@@ -29,15 +29,19 @@ const ThemeToggle = () => {
   return (
     <Toggle className="rounded-full">
       {!isLight ? (
-        <Sun
-          onClick={enableLightMode}
-          className="transition ease-in-out p-[1px] hover:scale-105"
-        />
+        <>
+          <Sun
+            onClick={enableLightMode}
+            className="transition ease-in-out p-[1px] hover:scale-105"
+          />
+        </>
       ) : (
-        <Moon
-          onClick={enableDarkMode}
-          className="transition ease-in-out p-[1px] hover:scale-105"
-        />
+        <div className="flex gap-2 w-full">
+          <Moon
+            onClick={enableDarkMode}
+            className="transition ease-in-out p-[1px] hover:scale-105"
+          />
+        </div>
       )}
     </Toggle>
   );

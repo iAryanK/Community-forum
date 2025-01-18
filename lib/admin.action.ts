@@ -81,6 +81,41 @@ const fetchAllUsers = async () => {
   }
 };
 
+const postsCreatedToday = async () => {
+  try {
+    await connectToDB();
+
+    const posts = await Post.find({
+      createdAt: {
+        $gte: new Date(new Date().setHours(0o0, 0o0, 0o0)),
+        $lt: new Date(new Date().setHours(23, 59, 59)),
+      },
+      isApproved: true,
+    }).sort({ createdAt: -1 });
+
+    return posts;
+  } catch (error) {
+    console.log("[POSTS CREATED TODAY ERROR]", error);
+  }
+};
+
+const usersJoinedToday = async () => {
+  try {
+    await connectToDB();
+
+    const users = await User.find({
+      joinedAt: {
+        $gte: new Date(new Date().setHours(0, 0, 0)),
+        $lt: new Date(new Date().setHours(23, 59, 59)),
+      },
+    }).sort({ joinedAt: -1 });
+
+    return users;
+  } catch (error) {
+    console.log("[USERS JOINED TODAY ERROR]", error);
+  }
+};
+
 export {
   countUsers,
   countPosts,
@@ -88,4 +123,6 @@ export {
   approvePost,
   countPostsToApprove,
   fetchAllUsers,
+  postsCreatedToday,
+  usersJoinedToday,
 };

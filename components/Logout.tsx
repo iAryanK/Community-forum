@@ -20,8 +20,8 @@ const Logout = () => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="flex gap-2 text-sm items-center hover:bg-muted py-[5px] w-full rounded">
-        <LogOut size={18} className="ml-2" /> Logout
+      <AlertDialogTrigger className="flex gap-2 items-center hover:bg-secondary/80 p-1 rounded-lg w-full">
+        <LogOut size={18} /> Logout
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

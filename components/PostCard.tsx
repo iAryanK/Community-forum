@@ -6,25 +6,29 @@ import { Eye, MessageSquareText } from "lucide-react";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PostCard = ({ post, showImage }: { post: any; showImage?: boolean }) => {
   return (
-    <Link
-      href={`/posts/${post._id}`}
-      className="hover:bg-secondary/50 hover:rounded-lg p-3 flex gap-2 items-start border-b border-secondary hover:border-none mt-1 motion-preset-slide-up"
-    >
-      {showImage && post?.author?.image && (
-        <Image
-          src={post.author.image}
-          alt={post.title}
-          width={100}
-          height={100}
-          className="rounded-full h-12 w-12"
-        />
-      )}
+    <div className="hover:bg-secondary/50 hover:rounded-lg p-3 border-b border-secondary hover:border-none mt-1 motion-preset-slide-up">
       <div className="w-full space-y-1">
-        <h4 className="text-amber-500">{post.author.name}</h4>
-        <h5 className="text-lg">{post.title}</h5>
-        <p className="text-muted-foreground text-sm line-clamp-2">
-          {post.content}
-        </p>
+        <Link
+          href={`/users/${post.author._id}`}
+          className="flex gap-2 items-center mb-2"
+        >
+          {showImage && post?.author?.image && (
+            <Image
+              src={post.author.image}
+              alt={post.title}
+              width={48}
+              height={48}
+              className="rounded-full h-6 w-6"
+            />
+          )}
+          <h4 className="text-amber-500">{post.author.name}</h4>
+        </Link>
+        <Link href={`/posts/${post._id}`} className="space-y-1">
+          <h5 className="text-lg">{post.title}</h5>
+          <p className="text-muted-foreground text-sm line-clamp-2">
+            {post.content}
+          </p>
+        </Link>
 
         <div className="flex justify-between items-center pt-4 text-sm">
           <p className="bg-amber-500/50 py-[2px] px-2 rounded-xl text-[11px] text-black dark:text-white font-geist_mono">
@@ -49,7 +53,7 @@ const PostCard = ({ post, showImage }: { post: any; showImage?: boolean }) => {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

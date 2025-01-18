@@ -14,7 +14,7 @@ const UserProfile = async () => {
 
   if (session)
     return (
-      <div className="m-4 p-4 h-fit w-80 backdrop-blur-sm bg-gradient-to-br from-amber-200/20 to-amber-500/20 rounded-lg motion-preset-slide-left ">
+      <div className="m-4 p-4 h-fit w-80 backdrop-blur-sm bg-gradient-to-br from-amber-200/20 to-amber-500/20 rounded-lg motion-preset-slide-up">
         <div className="flex items-center flex-col">
           <div className="relative border-black">
             {session.user?.image ? (

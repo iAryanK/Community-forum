@@ -16,6 +16,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { deleteComment } from "@/lib/comments.action";
+import { useState } from "react";
 
 const DeletePost = ({
   contentId,
@@ -26,9 +27,12 @@ const DeletePost = ({
 }) => {
   const { toast } = useToast();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleDeletePost = async () => {
+    setIsLoading(true);
     const res = await deletePost(contentId);
+    setIsLoading(false);
     if (res) router.replace("/");
     else {
       return toast({
@@ -39,7 +43,9 @@ const DeletePost = ({
   };
 
   const handleDeleteComment = async () => {
+    setIsLoading(true);
     const res = await deleteComment(contentId);
+    setIsLoading(false);
     if (res) router.refresh();
     else {
       return toast({
@@ -53,7 +59,10 @@ const DeletePost = ({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <button className="p-2 rounded-full hover:bg-secondary ease-in-out transition-all hover:scale-105">
-          <Trash2 size={18} />
+          <Trash2
+            size={18}
+            className={`${isLoading && "motion-preset-seesaw-lg"}`}
+          />
         </button>
       </AlertDialogTrigger>
       <AlertDialogContent>
