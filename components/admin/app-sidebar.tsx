@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -11,8 +13,10 @@ import { AdminNavItems } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import ThemeToggle from "../shared/ThemeToggle";
+import { usePathname } from "next/navigation";
 
 export function AppSidebar() {
+  const pathname = usePathname();
   return (
     <Sidebar>
       <SidebarContent>
@@ -36,7 +40,14 @@ export function AppSidebar() {
           <div className="flex flex-col justify-between h-full">
             <SidebarMenu className="px-2">
               {AdminNavItems.map((item) => (
-                <SidebarMenuItem key={item.title} className="mb-1">
+                <SidebarMenuItem
+                  key={item.title}
+                  className={`mb-1 ${
+                    pathname === item.url
+                      ? "bg-secondary rounded bg-opacity-10"
+                      : ""
+                  }`}
+                >
                   <SidebarMenuButton asChild>
                     <Link href={item.url}>
                       <item.icon />

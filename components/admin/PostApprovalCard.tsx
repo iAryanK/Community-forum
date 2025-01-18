@@ -8,9 +8,11 @@ import Link from "next/link";
 const PostApprovalCard = ({
   post,
   showImage,
+  approved,
 }: {
   post: any;
   showImage?: boolean;
+  approved?: boolean;
 }) => {
   return (
     <div className="hover:bg-secondary/80 rounded-lg p-3 flex gap-2 items-start bg-secondary/50 mt-1 motion-preset-slide-up">
@@ -43,7 +45,7 @@ const PostApprovalCard = ({
           <p className="bg-amber-500/50 py-[2px] px-2 rounded-xl text-[11px] text-black dark:text-white font-geist_mono">
             {formatDate(post.createdAt)}
           </p>
-          <ApprovalButton postId={JSON.stringify(post._id)} />
+          {!approved && <ApprovalButton postId={JSON.stringify(post._id)} />}
         </div>
       </div>
     </div>

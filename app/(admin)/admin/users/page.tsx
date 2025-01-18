@@ -9,7 +9,6 @@ const page = async () => {
   const session = await auth();
   const users = await fetchAllUsers();
   const recently_joined_users = await usersJoinedToday();
-  console.log(recently_joined_users);
 
   return (
     <div className="md:w-1/2 space-y-4">
@@ -25,7 +24,7 @@ const page = async () => {
         <TabsContent value="recently_joined">
           {recently_joined_users &&
             recently_joined_users.map((user) => (
-              <div key={user._id}>
+              <div key={user._id} className="mb-1">
                 <div
                   key={user._id}
                   className="flex flex-col p-4 bg-secondary/50 hover:bg-secondary/60 rounded-lg gap-2"
@@ -70,7 +69,7 @@ const page = async () => {
             users.map(
               (user) =>
                 session?.user?.email !== user.email && (
-                  <div key={user._id}>
+                  <div key={user._id} className="mb-1">
                     <div
                       key={user._id}
                       className="flex flex-col p-4 bg-secondary/50 hover:bg-secondary/60 rounded-lg gap-2"

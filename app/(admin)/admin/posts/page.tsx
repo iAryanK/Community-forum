@@ -3,8 +3,11 @@ import { fetchPostsToApprove, postsCreatedToday } from "@/lib/admin.action";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Page = async () => {
-  const posts = await fetchPostsToApprove();
-  const latestPosts = await postsCreatedToday();
+  const [posts, latestPosts] = await Promise.all([
+    fetchPostsToApprove(),
+    postsCreatedToday(),
+  ]);
+
   return (
     <div className="md:w-1/2 space-y-2">
       <Tabs defaultValue="posts_to_approve">
@@ -25,7 +28,7 @@ const Page = async () => {
         <TabsContent value="latest_posts">
           {latestPosts &&
             latestPosts.map((post) => (
-              <PostApprovalCard key={post._id} post={post} showImage />
+              <PostApprovalCard key={post._id} post={post} showImage approved />
             ))}
         </TabsContent>
       </Tabs>

@@ -76,6 +76,11 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+
   .gradient-fade {
     -webkit-mask-image: linear-gradient(to top, transparent 10%, black 90%);
     mask-image: linear-gradient(to top, transparent 10%, black 90%);

@@ -3,6 +3,8 @@
 import Post from "@/models/post.model";
 import { connectToDB } from "./db";
 import User from "@/models/user.model";
+import { sendPostApprovalNotification } from "./notify.action";
+import { NotifyType } from "@/models/notify.model";
 
 const countUsers = async () => {
   try {
@@ -49,6 +51,12 @@ const approvePost = async (postId: string) => {
     post.isApproved = true;
 
     post.save();
+
+    await sendPostApprovalNotification(
+      post.author._id,
+      post.title,
+      NotifyType.PostApproval
+    );
 
     return true;
   } catch (error) {
