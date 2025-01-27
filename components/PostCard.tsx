@@ -24,7 +24,7 @@ const PostCard = ({ post, showImage }: { post: any; showImage?: boolean }) => {
           <h4 className="text-amber-500">{post.author.name}</h4>
         </Link>
         <Link href={`/posts/${post._id}`} className="space-y-1">
-          <h5 className="text-lg">{post.title}</h5>
+          <h5 className="text-lg line-clamp-3">{post.title}</h5>
           <p className="text-muted-foreground text-sm line-clamp-2">
             {post.content}
           </p>

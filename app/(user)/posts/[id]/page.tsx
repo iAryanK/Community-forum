@@ -14,6 +14,9 @@ import { getCommentById } from "@/lib/comments.action";
 import { auth } from "@/auth";
 import Link from "next/link";
 import DeletePost from "@/components/DeletePost";
+import markdownit from "markdown-it";
+
+const md = markdownit();
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
@@ -21,6 +24,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const session = await auth();
   const user = await fetchUserById(session?.user?.id);
 
+  const parsedContent = md.render(post.content || "");
   return (
     <div className="m-4 p-4 w-full backdrop-blur-sm bg-secondary/30 rounded-lg">
       <div className="flex items-center justify-between mb-4">
@@ -60,7 +64,10 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         </p>
         {session?.user?.isAdmin && <DeletePost contentId={post.id} />}
       </div>
-      <h3 className="font-light">{post.content}</h3>
+      <article
+        className="prose !max-w-none font-work-sans break-normal dark:prose-invert text-justify font-light"
+        dangerouslySetInnerHTML={{ __html: parsedContent }}
+      />
 
       <div className="py-5 text-amber-500 text-lg">
         {formatNumber(post.comments.length)}{" "}

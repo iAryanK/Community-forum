@@ -11,6 +11,7 @@ import { useInputStore } from "@/hooks/usePostStore";
 import { createPost } from "@/lib/posts.action";
 import { LoaderCircle } from "lucide-react";
 import { useState } from "react";
+import MDEditor from "@uiw/react-md-editor";
 
 const CreatePostDialog = ({ authorId }: { authorId: string }) => {
   const { toast } = useToast();
@@ -69,14 +70,20 @@ const CreatePostDialog = ({ authorId }: { authorId: string }) => {
                 setInputData({ ...inputData, title: e.target.value })
               }
             />
-            <textarea
-              name="content"
-              placeholder="Description"
-              className="h-full w-full resize-none rounded-md bg-transparent px-4 py-3 text-sm outline-none"
+            <MDEditor
               value={inputData.content}
-              onChange={(e) =>
-                setInputData({ ...inputData, content: e.target.value })
+              onChange={(value) =>
+                setInputData({ ...inputData, content: value as string })
               }
+              preview="edit"
+              height={300}
+              style={{ borderRadius: 0, overflow: "hidden" }}
+              textareaProps={{
+                placeholder: "Description",
+              }}
+              previewOptions={{
+                disallowedElements: ["style"],
+              }}
             />
             <div className="flex justify-end px-4 py-3">
               <button
