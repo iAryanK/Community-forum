@@ -16,7 +16,7 @@ const TrendingPosts = async () => {
         posts.map((post) => (
           <Link
             href={`/posts/${post._id}`}
-            className="flex gap-4  hover:text-blue-400 items-center max-sm:pb-2"
+            className="flex gap-4 hover:text-[#C30F55] hover:dark:text-[#e5b9dc] items-center max-sm:pb-2"
             key={post._id}
           >
             <p>

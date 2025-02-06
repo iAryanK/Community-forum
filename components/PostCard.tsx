@@ -21,7 +21,9 @@ const PostCard = ({ post, showImage }: { post: any; showImage?: boolean }) => {
               className="rounded-full h-6 w-6"
             />
           )}
-          <h4 className="text-amber-500">{post.author.name}</h4>
+          <h4 className="text-[#C30F55] dark:text-[#ddd]">
+            {post.author.name}
+          </h4>
         </Link>
         <Link href={`/posts/${post._id}`} className="space-y-1">
           <h5 className="text-lg line-clamp-3">{post.title}</h5>
@@ -31,7 +33,7 @@ const PostCard = ({ post, showImage }: { post: any; showImage?: boolean }) => {
         </Link>
 
         <div className="flex justify-between items-center pt-4 text-sm">
-          <p className="bg-amber-500/50 py-[2px] px-2 rounded-xl text-[11px] text-black dark:text-white font-geist_mono">
+          <p className="bg-[#C30F55]/50 py-[2px] px-2 rounded-xl text-[11px] text-black dark:text-white font-geist_mono">
             {formatDate(post.createdAt)}
           </p>
           <div className="flex gap-5 items-center">

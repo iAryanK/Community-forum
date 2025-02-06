@@ -15,6 +15,7 @@ import { auth } from "@/auth";
 import Link from "next/link";
 import DeletePost from "@/components/DeletePost";
 import markdownit from "markdown-it";
+import { Separator } from "@/components/ui/separator";
 
 const md = markdownit();
 
@@ -69,7 +70,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         dangerouslySetInnerHTML={{ __html: parsedContent }}
       />
 
-      <div className="py-5 text-amber-500 text-lg">
+      <Separator className="mt-5" />
+
+      <div className="py-5 text-[#C30F55] dark:text-[#ddd] text-lg">
         {formatNumber(post.comments.length)}{" "}
         {post.comments.length > 1 ? "Comments" : "Comment"}
       </div>
@@ -77,7 +80,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
       <CreateComment postId={JSON.stringify(post._id)} />
 
       <div className="mt-8 space-y-5">
-        <div className="text-lg text-amber-500">All Comments</div>
+        <div className="text-lg text-[#C30F55] dark:text-[#ddd]">
+          All Comments
+        </div>
         {post.comments.map((comment: any) => (
           <CommentCard
             key={comment._id}

@@ -37,7 +37,7 @@ const CreatePostDialog = ({ authorId }: { authorId: string }) => {
     <Dialog>
       <DialogTrigger className="w-full">
         <div
-          className="flex h-10 items-center border-none border-zinc-950/20 p-2  dark:border-zinc-50/20 dark:bg-zinc-800 dark:text-zinc-50 dark:bg-gradient-to-r dark:from-amber-600 dark:to-amber-500 bg-[#272727] hover:bg-[#272727]/90 w-full justify-center text-white"
+          className="flex h-10 items-center border-none border-zinc-950/20 p-2  dark:border-zinc-50/20 dark:bg-zinc-800 dark:text-zinc-50 dark:bg-gradient-to-r dark:from-[#C30F66] dark:to-[#C30F55] bg-[#C30F55] hover:bg-[#C30F55]/90 w-full justify-center text-white"
           style={{
             borderRadius: 8,
           }}
