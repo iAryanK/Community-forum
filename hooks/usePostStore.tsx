@@ -3,6 +3,7 @@ import { create } from "zustand";
 export interface InputDataType {
   title: string;
   content: string;
+  invite: string[];
 }
 
 interface InputStore {
@@ -14,6 +15,7 @@ export const useInputStore = create<InputStore>((set) => ({
   inputData: {
     title: "",
     content: "",
+    invite: [],
   },
 
   setInputData: (data) => {

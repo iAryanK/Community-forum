@@ -25,7 +25,7 @@ const CreatePostDialog = ({ authorId }: { authorId: string }) => {
 
     await createPost({ ...inputData, authorId });
 
-    setInputData({ title: "", content: "" });
+    setInputData({ title: "", content: "", invite: [] });
     setIsLoading(false);
     toast({
       title: "Success !",
@@ -84,6 +84,17 @@ const CreatePostDialog = ({ authorId }: { authorId: string }) => {
               previewOptions={{
                 disallowedElements: ["style"],
               }}
+            />{" "}
+            <input
+              type="email"
+              name="invite"
+              placeholder="Invite (comma separated emails)"
+              className="h-12 w-full px-4 py-3 text-sm outline-none dark:bg-zinc-900 bg-zinc-200"
+              autoFocus
+              value={inputData.invite}
+              onChange={(e) =>
+                setInputData({ ...inputData, invite: [e.target.value] })
+              }
             />
             <div className="flex justify-end px-4 py-3">
               <button
