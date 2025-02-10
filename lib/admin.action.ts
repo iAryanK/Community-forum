@@ -5,6 +5,7 @@ import { connectToDB } from "./db";
 import User from "@/models/user.model";
 import { sendPostApprovalNotification } from "./notify.action";
 import { NotifyType } from "@/models/notify.model";
+import { sendInvitationMail } from "./mail.action";
 
 const countUsers = async () => {
   try {
@@ -57,6 +58,8 @@ const approvePost = async (postId: string) => {
       post.title,
       NotifyType.PostApproval
     );
+
+    sendInvitationMail(post.invite, post._id, post.title);
 
     return true;
   } catch (error) {

@@ -10,17 +10,19 @@ interface CreatePostType {
   title: string;
   content: string;
   authorId: string;
+  invite?: string[];
 }
 
 export const createPost = async (data: CreatePostType) => {
   try {
-    const { title, content, authorId } = data;
+    const { title, content, authorId, invite } = data;
 
     await connectToDB();
 
     await Post.create({
       title,
       content,
+      invite,
       author: authorId,
     });
 

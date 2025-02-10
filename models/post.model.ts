@@ -7,6 +7,7 @@ export interface IPost extends Document {
   author: Schema.Types.ObjectId;
   comments: Schema.Types.ObjectId[];
   isApproved: boolean;
+  invite?: string[];
   createdAt: Date;
 }
 
@@ -17,6 +18,7 @@ const PostSchema = new Schema({
   author: { type: Schema.Types.ObjectId, ref: "User" },
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
   isApproved: { type: Boolean, default: false },
+  invite: [{ type: String }],
   createdAt: { type: Date, default: Date.now },
 });
 

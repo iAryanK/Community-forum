@@ -14,7 +14,7 @@ const UserProfile = async () => {
 
   if (session)
     return (
-      <div className="m-4 p-4 h-fit w-80 backdrop-blur-sm bg-gradient-to-br from-amber-200/20 to-amber-500/20 rounded-lg motion-preset-slide-up">
+      <div className="m-4 p-4 h-fit w-80 backdrop-blur-sm bg-secondary/30 rounded-lg motion-preset-slide-up">
         <div className="flex items-center flex-col">
           <div className="relative border-black">
             {session.user?.image ? (
@@ -55,7 +55,7 @@ const UserProfile = async () => {
     );
 
   return (
-    <div className="m-4 p-4 h-fit w-80  backdrop-blur-sm bg-gradient-to-br from-amber-200/20 to-amber-500/20 rounded-lg">
+    <div className="m-4 p-4 h-fit w-80  backdrop-blur-sm bg-secondary/30 rounded-lg">
       <div className="flex items-center flex-col">
         <Image
           src="https://github.com/shadcn.png"
@@ -74,7 +74,7 @@ const UserProfile = async () => {
             await signIn("google");
           }}
         >
-          <Button className="w-full tracking-wider font-geist_mono bg-gradient-to-r from-amber-500 to-amber-300">
+          <Button className="w-full tracking-wider font-geist_mono bg-gradient-to-r from-[#C30F66] to-[#C30F55] text-white">
             LogIn via Google
           </Button>
         </form>
