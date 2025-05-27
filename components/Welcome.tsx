@@ -25,8 +25,9 @@ const Welcome = async () => {
           <div className="glass"></div>
           <div className="content">
             <span className="title">
-              Welcome to <br />
-              Exadata Community
+              Welcome to the
+              <br />
+              Community
             </span>
             <span className="text">
               Create, share, and learn about <br /> big data and its impact on
