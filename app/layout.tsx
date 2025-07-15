@@ -19,7 +19,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Exadata Community",
+  title: "Community Forum",
   description:
     "Access a community of big data enthusiasts actively working in healthcare sector and engage in meaningful conversations with your peers.",
 };

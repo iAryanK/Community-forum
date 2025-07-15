@@ -45,10 +45,10 @@ const CreatePostDialog = ({ authorId }: { authorId: string }) => {
           <span>Create Post</span>
         </div>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-3xl">
         <DialogTitle className="sr-only">Post</DialogTitle>
         <div
-          className="relative h-[400px] left-0 mx-auto w-full shrink overflow-hidden border border-zinc-950/10 bg-white outline-none dark:bg-zinc-800"
+          className="relative h-[600px] left-0 mx-auto w-full shrink overflow-hidden border border-zinc-950/10 bg-white outline-none dark:bg-zinc-800"
           style={{
             borderRadius: 12,
           }}
@@ -76,7 +76,7 @@ const CreatePostDialog = ({ authorId }: { authorId: string }) => {
                 setInputData({ ...inputData, content: value as string })
               }
               preview="edit"
-              height={300}
+              height={500}
               style={{ borderRadius: 0, overflow: "hidden" }}
               textareaProps={{
                 placeholder: "Description",
